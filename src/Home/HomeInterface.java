@@ -5,6 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import admin.admin;
+import inmates.inmate;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -58,6 +62,10 @@ public class HomeInterface extends JFrame {
 		JButton btnPrisoners = new JButton("INMATES");
 		btnPrisoners.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				inmate ad = new inmate();
+				if(e.getSource()==btnPrisoners) {
+					ad.main(new String[0]);
+				}
 			}
 		});
 		btnPrisoners.setForeground(new Color(0, 0, 128));
