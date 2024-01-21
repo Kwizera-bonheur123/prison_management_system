@@ -5,11 +5,13 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -52,7 +54,7 @@ public class employees extends JFrame {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jail_management_system","root","");
 			Statement st = con.createStatement();
-			String query= "SELECT prison_id as ID, prison_name as NAME, prison_district as district, prison_sector as sector FROM prisons";
+			String query= "select admin_id, fname, lname, id_number, phone, gender, martial_status, DoB, email, role from admin";
 			ResultSet rs= st.executeQuery(query);
 			ResultSetMetaData rsmd = rs.getMetaData();
 			DefaultTableModel model = (DefaultTableModel) table_1.getModel();	
@@ -64,13 +66,24 @@ public class employees extends JFrame {
 			for(int i = 0; i < cols; i++)
 				colName[i] = rsmd.getColumnName(i + 1);
 			model.setColumnIdentifiers(colName);
-			String id,name,district,sector;
+			String id,fname,lname,id_number,phone,gender,marital_status,email,role;
+			Date DoB;
 			while(rs.next()) {
 				id = rs.getString(1);
-				name = rs.getString(2);
-				district = rs.getString(3);
-				sector = rs.getString(4);
-				String[] row = {id,name,district,sector};
+				fname = rs.getString(2);
+				lname = rs.getString(3);
+				id_number = rs.getString(4);
+				phone = rs.getString(5);
+				gender = rs.getString(6);
+				marital_status = rs.getString(7);
+				DoB = rs.getDate(8);;
+				email = rs.getString(9);
+				role = rs.getString(10);
+				
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	            String formattedDate = dateFormat.format(DoB);
+	            
+				String[] row = {id,fname,lname,id_number,phone,gender,marital_status,formattedDate,email,role};
 				model.addRow(row);
 			}
 			
