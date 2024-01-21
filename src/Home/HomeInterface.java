@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import admin.admin;
+import employees.employees;
 import inmates.inmate;
 
 import java.awt.Color;
@@ -74,6 +75,14 @@ public class HomeInterface extends JFrame {
 		contentPane.add(btnPrisoners);
 		
 		JButton btnEmployees = new JButton("EMPLOYEES");
+		btnEmployees.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				employees ad = new employees();
+				if(e.getSource()==btnEmployees) {
+					ad.main(new String[0]);
+				}
+			}
+		});
 		btnEmployees.setForeground(new Color(0, 0, 128));
 		btnEmployees.setBackground(new Color(255, 255, 255));
 		btnEmployees.setBounds(316, 21, 111, 23);

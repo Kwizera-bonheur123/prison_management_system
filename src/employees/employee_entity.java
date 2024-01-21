@@ -147,9 +147,9 @@ public class employee_entity {
         ) {
             // Set the values for the prepared statement
         	
-           stm.setString(1, this.fname);
+            stm.setString(1, this.fname);
             stm.setString(2, this.lname);
- +             stm.setString(3, this.id_card); 
+            stm.setString(3, this.id_card); 
             stm.setString(4, this.phone);
             stm.setString(5, this.gender);
             stm.setString(6, this.marital_status);
@@ -174,14 +174,14 @@ public class employee_entity {
         }	
     }	
 
-public void delete(int prison_id) {
+public void delete(int id) {
 	// JDBC URL, username, and password of MySQL server
     String url = "jdbc:mysql://localhost/jail_management_system";
     String user = "root";
     String password = "";
 
     // SQL query to delete data
-    String sql = "DELETE FROM prisons WHERE prison_id = ?";
+    String sql = "DELETE FROM admin WHERE admin_id = ?";
 
     try (
         // Establish the con
@@ -191,7 +191,7 @@ public void delete(int prison_id) {
         PreparedStatement stm = con.prepareStatement(sql);
     ) {
         // Set the value for the WHERE clause
-        stm.setInt(1, prison_id); // Assuming there is a column named 'id' for the WHERE clause
+        stm.setInt(1, id); // Assuming there is a column named 'id' for the WHERE clause
 
         // Execute the delete
         int rowsAffected = stm.executeUpdate();
@@ -211,16 +211,16 @@ public void delete(int prison_id) {
 }
 
 
-public void update(int prison_id) {
+public void update(int id) {
 	// JDBC URL, username, and password of MySQL server
     String url = "jdbc:mysql://localhost/jail_management_system";
     String user = "root";
     String password = "";
 
     // SQL query to update data
-    String sql = "UPDATE prisons SET prison_name = ?, prison_district = ?,prison_sector = ? WHERE prison_id = ?";
+    String sql = "UPDATE admin SET fname = ?, lname = ?, id_number = ?, phone = ?, gender = ?, martial_status = ?, DoB = ?, email = ?, role = ? WHERE admin_id = ?";
 
-    try (
+    try ( 
         // Establish the con
         Connection con = DriverManager.getConnection(url, user, password);
 
@@ -228,24 +228,32 @@ public void update(int prison_id) {
         PreparedStatement stm = con.prepareStatement(sql);
     ) {
         // Set the new values for the update
-        stm.setString(1, this.getName());
-        stm.setString(2, this.getDistrict());
-        stm.setString(3, this.getSector());
-        stm.setInt(4, prison_id);
+    	stm.setString(1, this.fname);
+        stm.setString(2, this.lname);
+        stm.setString(3, this.id_card); 
+        stm.setString(4, this.phone);
+        stm.setString(5, this.gender);
+        stm.setString(6, this.marital_status);
+        stm.setString(7, this.date);
+        stm.setString(8, this.email);
+        stm.setString(9, this.role);
+        stm.setInt(10, id);
         // Execute the update
         int rowsAffected = stm.executeUpdate();
 
         // Check the result
         if (rowsAffected > 0) {
-        	JOptionPane.showMessageDialog(null, "Data updated successfully!","After insert",JOptionPane.INFORMATION_MESSAGE);
+        	JOptionPane.showMessageDialog(null, "Data updated successfully!","After update",JOptionPane.INFORMATION_MESSAGE);
             System.out.println("Data updated successfully!");
         } else {
-        	JOptionPane.showMessageDialog(null, "Failed to update data.!","After insert",JOptionPane.ERROR_MESSAGE);
+        	JOptionPane.showMessageDialog(null, "Failed to update data.!","After update",JOptionPane.ERROR_MESSAGE);
             System.out.println("Failed to update data. No matching record found.");
         }
 
     } catch (SQLException e) {
         e.printStackTrace();
-    }   
+        JOptionPane.showMessageDialog(null, "Failed to update data. Error: " + e.getMessage(), "After update", JOptionPane.ERROR_MESSAGE);
+        System.out.println("Failed to update data. Error: " + e.getMessage());
+    }
 }
 }
