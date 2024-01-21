@@ -135,7 +135,7 @@ public class employee_entity {
         String user = "root";
         String password = "";
 
-        String sql = "INSERT INTO admin (fname,lname,id_number,phone,gender,martial_status,DoB,email,password) VALUES (?, ?, ?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO admin (  fname,lname,id_number,phone,gender,martial_status,DoB,email,password) VALUES (?, ?, ?,?,?,?,?,?,?)";
 
         try (
         		
@@ -149,7 +149,7 @@ public class employee_entity {
         	
            stm.setString(1, this.fname);
             stm.setString(2, this.lname);
-            stm.setString(3, this.id_card);
+ +             stm.setString(3, this.id_card); 
             stm.setString(4, this.phone);
             stm.setString(5, this.gender);
             stm.setString(6, this.marital_status);

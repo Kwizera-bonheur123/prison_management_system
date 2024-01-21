@@ -53,9 +53,8 @@ public class employees extends JFrame {
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jail_management_system","root","");
 			Statement st = con.createStatement();
 			String query= "SELECT * FROM admin";
-			ResultSet rs= st.executeQuery(query);
 			ResultSetMetaData rsmd = rs.getMetaData();
-			DefaultTableModel model = (DefaultTableModel) table_1.getModel();	
+              			DefaultTableModel model = (DefaultTableModel) table_1.getModel();	
 			
 			model.setRowCount(0);
 			
@@ -64,7 +63,7 @@ public class employees extends JFrame {
 			for(int i = 0; i < cols; i++)
 				colName[i] = rsmd.getColumnName(i + 1);
 			model.setColumnIdentifiers(colName);
-			String id,name,district,sector;
+			String id,fname,lname,  ;
 			while(rs.next()) {
 				id = rs.getString(1);
 				name = rs.getString(2);
