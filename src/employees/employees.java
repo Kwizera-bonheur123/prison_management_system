@@ -216,7 +216,7 @@ public class employees extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				employee_entity emp = new employee_entity();
 				if(e.getSource()==btnNewButton_1_1) {
-					int id=Integer.parseInt(prison_id.getText());
+				int id=Integer.parseInt(prison_id.getText());
 					emp.setFname(fnmae.getText());
 					emp.setLname(lname.getText());
 					emp.setId_card(identity.getText());

@@ -89,6 +89,10 @@ public class HomeInterface extends JFrame {
 		contentPane.add(btnEmployees);
 		
 		JButton btnPrisons = new JButton("PRISONS");
+		btnPrisons.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnPrisons.setForeground(new Color(0, 0, 128));
 		btnPrisons.setBackground(new Color(255, 255, 255));
 		btnPrisons.setBounds(454, 21, 89, 23);
